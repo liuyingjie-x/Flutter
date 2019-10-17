@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app/routes/router.dart';
+import 'package:flutter_app/widget/decoratedbox.dart';
+import 'package:flutter_app/widget/flex_expanded.dart';
+import 'package:flutter_app/widget/padding_margin.dart';
+import 'package:flutter_app/widget/row_column.dart';
+import 'package:flutter_app/widget/wrap_flow.dart';
 
 void main() => runApp(MyApp());
 
@@ -58,9 +63,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
-
 //  void _onItemClick(BuildContext context,int index){
 //    Navigator.of(context).push(
 //      new MaterialPageRoute(builder: null)
@@ -72,7 +74,7 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-    /*  body: Center(
+      /*  body: Center(
         child: ListView.builder(
             itemCount: 100,
             itemExtent: 50.0, //强制高度为50.0
@@ -81,8 +83,133 @@ class _MyHomePageState extends State<MyHomePage> {
               return ListTile(title: Text("$index"));
             }),
       ),*/
-      body: Center(
-        child: ListView2()
+//      body: Center(
+//        child: ListView2()
+//      ),
+      body: ListView(
+        children: <Widget>[
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                  return NewRoute();
+                }));
+              },
+              child: Container(
+                height: 50,
+                alignment: Alignment.center,
+                child: Text("布局"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return RowAndColumn();
+                    }));
+              },
+              child: Container(
+                height: 50,
+                alignment: Alignment.center,
+                child: Text("RowAndColumn"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return FlexAndExpanded();
+                    }));
+              },
+              child: Container(
+                height: 50,
+                alignment: Alignment.center,
+                child: Text("FlexAndExpanded"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return WrapAndFlow();
+                    }));
+              },
+              child: Container(
+                height: 50,
+                alignment: Alignment.center,
+                child: Text("wrap_flow"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return PaddingAndMargin();
+                    }));
+              },
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("padding_margin"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return NewRoute();
+                    }));
+              },
+//              child: Container(
+//                height: 100,
+//                alignment: Alignment.center,
+//                child: Text("decoratedbox"),
+//              )
+          ),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return NewRoute();
+                    }));
+              },
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("测试"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return NewRoute();
+                    }));
+              },
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("测试"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return NewRoute();
+                    }));
+              },
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("测试"),
+              )),
+          GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (buildContext) {
+                      return NewRoute();
+                    }));
+              },
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("测试"),
+              )),
+        ],
       ),
     );
   }
@@ -107,14 +234,12 @@ class ListView2 extends StatelessWidget {
     );
   }
 
-  Widget buildItem(BuildContext buildContext,int index){
-    return new GestureDetector(
-      onTap: (){
-        Navigator.push(buildContext,
-            MaterialPageRoute(builder: (buildContext){
-              return new NewRoute();
-            }));
-        NewRoute();
+  Widget buildItem(BuildContext buildContext, int index) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.push(buildContext, MaterialPageRoute(builder: (buildContext) {
+          return NewRoute();
+        }));
       },
       child: Container(
         child: Text("测试点击"),
