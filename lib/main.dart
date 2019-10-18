@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app/complete_homepage_demo.dart';
 import 'package:flutter_app/routes/router.dart';
 import 'package:flutter_app/widget/decoratedbox.dart';
 import 'package:flutter_app/widget/flex_expanded.dart';
@@ -165,13 +166,13 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (buildContext) {
-                      return NewRoute();
+                      return ScaffoldDemo();
                     }));
               },
               child: Container(
                 height: 100,
                 alignment: Alignment.center,
-                child: Text("测试"),
+                child: Text("homepage_demo"),
               )),
           GestureDetector(
               onTap: () {
