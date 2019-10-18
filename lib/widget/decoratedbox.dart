@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 class DecoratedBoxDemo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
       appBar: AppBar(
         title: Text("DecoratedBox"),
@@ -35,30 +34,18 @@ class DecoratedBoxDemo extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(80),
                 image: DecorationImage(
-                  image: AssetImage("lib/resource/images/andorid_icon.png"),
+                  image: AssetImage("lib/resource/images/android_icon.png"),
                   //alignment: Alignment.topLeft
                 ),
               ),
             ),
           ),
-//          Image(image: AssetImage("images/andorid_icon.png"))
+          Image(
+              height:40,
+              width:40,
+              image: AssetImage("lib/resource/images/blackman.png"))
         ],
       ),
     );
   }
 }
-
-//class ImageDemo extends StatelessWidget{
-//  @override
-//  Widget build(BuildContext context) {
-//    // TODO: implement build
-//    return Center(
-//      child: Container(
-//        height: 100,
-//        width: 100,
-//        child: Image.asset("images/andorid_icon.png"),
-//      ),
-//    );
-//  }
-//
-//}

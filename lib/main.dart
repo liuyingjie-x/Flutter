@@ -152,14 +152,14 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (buildContext) {
-                      return NewRoute();
+                      return DecoratedBoxDemo();
                     }));
               },
-//              child: Container(
-//                height: 100,
-//                alignment: Alignment.center,
-//                child: Text("decoratedbox"),
-//              )
+              child: Container(
+                height: 100,
+                alignment: Alignment.center,
+                child: Text("decoratedbox"),
+              )
           ),
           GestureDetector(
               onTap: () {
