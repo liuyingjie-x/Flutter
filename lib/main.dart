@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_app/complete_homepage_demo.dart';
 import 'package:flutter_app/routes/router.dart';
 import 'package:flutter_app/widget/decoratedbox.dart';
@@ -18,11 +19,6 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-//        //注册路由表
-//        routes:{
-//          "new_page":(context)=>NewRoute(),
-//          "/":(context)=> MyHomePage(title: 'Flutter Demo Home Page'), //注册首页路由
-//        }
       onGenerateRoute: (RouteSettings settings) {
         if (settings.name == "tip") {
           return MaterialPageRoute(builder: (context) {
@@ -64,11 +60,9 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-//  void _onItemClick(BuildContext context,int index){
-//    Navigator.of(context).push(
-//      new MaterialPageRoute(builder: null)
-//    )
-//  }
+  String _batteryLevel = 'Unknown battery level.';
+  static const platform = const MethodChannel('samples.flutter.io/battery');
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -205,14 +199,34 @@ class _MyHomePageState extends State<MyHomePage> {
                       return NewRoute();
                     }));
               },
-              child: Container(
-                height: 100,
-                alignment: Alignment.center,
-                child: Text("测试"),
-              )),
+            child: new Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                new RaisedButton(
+                  child: new Text('Get Battery Level'),
+                  onPressed: _getBatteryLevel,
+                ),
+                new Text(_batteryLevel),
+              ],
+            ),
+          ),
+
         ],
       ),
     );
+  }
+  Future<Null> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
   }
 }
 
@@ -249,5 +263,47 @@ class ListView2 extends StatelessWidget {
       ),
     );
 //    return new Text("测试点击");
+  }
+}
+
+class PageState extends State<MyHomePage> {
+  static const platform = const MethodChannel('samples.flutter.io/battery');
+
+  // Get battery level.
+  String _batteryLevel = 'Unknown battery level.';
+
+  @override
+  Widget build(BuildContext context) {
+    return new Scaffold(
+      appBar: AppBar(
+        title: Text("channel"),
+      ),
+      body: new Center(
+        child: new Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            new RaisedButton(
+              child: new Text('Get Battery Level'),
+              onPressed: _getBatteryLevel,
+            ),
+            new Text(_batteryLevel),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Future<Null> _getBatteryLevel() async {
+    String batteryLevel;
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      batteryLevel = 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      batteryLevel = "Failed to get battery level: '${e.message}'.";
+    }
+
+    setState(() {
+      _batteryLevel = batteryLevel;
+    });
   }
 }
