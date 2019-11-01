@@ -172,7 +172,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onTap: () {
                 Navigator.push(context,
                     MaterialPageRoute(builder: (buildContext) {
-                      return NewRoute();
+                      return FirstRoute();
                     }));
               },
               child: Container(
@@ -267,6 +267,7 @@ class ListView2 extends StatelessWidget {
 }
 
 class PageState extends State<MyHomePage> {
+
   static const platform = const MethodChannel('samples.flutter.io/battery');
 
   // Get battery level.
@@ -306,4 +307,23 @@ class PageState extends State<MyHomePage> {
       _batteryLevel = batteryLevel;
     });
   }
+}
+
+class testState extends State{
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+  @override
+  void didUpdateWidget(StatefulWidget oldWidget) {
+    // TODO: implement didUpdateWidget
+    super.didUpdateWidget(oldWidget);
+  }
+  @override
+  Widget build(BuildContext context) {
+    // TODO: implement build
+    return null;
+  }
+
 }
