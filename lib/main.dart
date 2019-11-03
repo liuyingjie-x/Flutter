@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_app/complete_homepage_demo.dart';
@@ -7,6 +11,7 @@ import 'package:flutter_app/widget/flex_expanded.dart';
 import 'package:flutter_app/widget/padding_margin.dart';
 import 'package:flutter_app/widget/row_column.dart';
 import 'package:flutter_app/widget/wrap_flow.dart';
+
 
 void main() => runApp(MyApp());
 
@@ -210,10 +215,70 @@ class _MyHomePageState extends State<MyHomePage> {
               ],
             ),
           ),
+          RaisedButton(
+            child: Text('httpClientDemo'),
+            onPressed: getRequest,
+          )
 
         ],
       ),
     );
+  }
+
+
+  httpClientDemo() async{
+    var httpClient =HttpClient();
+    httpClient.idleTimeout=Duration(seconds:5);
+
+    var uri=Uri.parse("https://flutter.dev");
+    var request=await httpClient.getUrl(uri);
+    request.headers.add("user-agent", "Custom-UA");
+
+    var response =await request.close();
+
+    if(response.statusCode==HttpStatus.ok){
+      print(await response.transform(utf8.decoder).join());
+    }else{
+      print('Error: \nHttp status ${response.statusCode}');
+
+    }
+
+  }
+
+//  httpDemo()async{
+//    var client=http.Client();
+//  }
+
+  httpGet() async {
+    //创建网络调用示例
+    var client = http.Client();
+
+    //构造URI
+    var uri = Uri.parse("https://flutter.dev");
+
+    //设置user-agent为"Custom-UA"，随后立即发出请求
+    http.Response response = await client.get(uri, headers : {"user-agent" : "Custom-UA"});
+
+    //打印请求结果
+    if(response.statusCode == HttpStatus.ok) {
+      print(response.body);
+    } else {
+      print("Error: ${response.statusCode}");
+    }
+  }
+  void getRequest() async {
+    //创建网络调用示例
+    Dio dio = new Dio();
+
+    //设置URI及请求user-agent后发起请求
+    var response = await dio.get("https://flutter.dev", options:Options(headers: {"user-agent" : "Custom-UA"}));
+
+    //打印请求结果
+    if(response.statusCode == HttpStatus.ok) {
+      print(response.data.toString());
+    } else {
+      print("Error: ${response.statusCode}");
+    }
   }
   Future<Null> _getBatteryLevel() async {
     String batteryLevel;
